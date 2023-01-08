@@ -1,0 +1,114 @@
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
+import Trimmer from 'react-native-trimmer'
+import AudioRecorderPlayer from 'react-native-audio-recorder-player';
+
+
+const AudioCut = ({ navigation, route }) => {
+
+    const song = route.params.songData;
+    // console.log('song data ===>>', song)
+    const [audioRecorderPlayer] = useState(new AudioRecorderPlayer());
+
+    const [Select, setSelect] = useState({
+        trimmerLeftHandlePosition: 20,
+        trimmerRightHandlePosition: 100,
+    })
+    const [Scrubbing, setScrubbing] = useState(1000);
+    const [PlayBtn, setPlayBtn] = useState(false);
+    const [startTime, setStartTime] = useState('00:00:00');
+    const [durationTime, setdurationTime] = useState('00:00:00');
+    const [PositionSec, setPositionSec] = useState()
+    const [durationSec, setdurationSec] = useState(10)
+
+    const handlePlay = () => {
+        setPlayBtn(true);
+        audioRecorderPlayer.startPlayer(song.url);
+        audioRecorderPlayer.setVolume(1.0);
+
+        audioRecorderPlayer.addPlayBackListener(async (e) => {
+            if (e.currentPosition === e.duration) {
+                audioRecorderPlayer.stopPlayer();
+            }
+            let percent = Math.round(
+                (Math.floor(e.currentPosition) / Math.floor(e.duration)) * 100
+            );
+            setPositionSec(e.currentPosition / 1000);
+            setScrubbing(e.currentPosition / 1000)
+            setdurationSec(e.duration / 1000);
+            setStartTime(audioRecorderPlayer.mmssss(Math.floor(e.currentPosition)))
+            setdurationTime(audioRecorderPlayer.mmssss(Math.floor(e.duration)))
+        })
+    }
+
+    const handlePause = async () => {
+        setPlayBtn(false);
+        await audioRecorderPlayer.pausePlayer();
+    }
+
+    const onHandleChange = ({ leftPosition, rightPosition }) => {
+        setSelect({
+            trimmerRightHandlePosition: rightPosition,
+            trimmerLeftHandlePosition: leftPosition
+        })
+    }
+
+    console.log('zjhgsdvjhsvbc', Select)
+
+    const handleChangs = (value) => {
+        audioRecorderPlayer.seekToPlayer(value * 1000)
+        console.log(value * 1000)
+    }
+
+    return (
+        <View style={styles.container}>
+
+            <View style={{ marginBottom: 50, alignItems: 'center' }}>
+                {PlayBtn ?
+                    <TouchableOpacity style={styles.songbtn}
+                        onPress={handlePause}>
+                        <Text style={styles.btntext}>Pause</Text>
+                    </TouchableOpacity> :
+                    <TouchableOpacity style={styles.songbtn}
+                        onPress={handlePlay}>
+                        <Text style={styles.btntext}>Play</Text>
+                    </TouchableOpacity>
+                }
+                <View style={{flexDirection: 'row', marginTop: 50, justifyContent: 'space-between', width: 300}}>
+                    <Text style={{fontSize: 25, fontWeight: '700'}}>{startTime}</Text>
+                    <Text style={{fontSize: 25, fontWeight: '700'}}>{durationTime}</Text>
+                </View>
+
+
+            </View>
+            <Trimmer
+                onHandleChange={value => console.log("ghvjhzvch", value)}
+                // totalDuration={300}
+                scrubberPosition={Scrubbing}
+                // scaleInOnInit={true}
+                totalDuration={durationSec}
+                onScrubbingComplete={value => handleChangs(value)}
+                trimmerLeftHandlePosition={Select?.trimmerLeftHandlePosition}
+                trimmerRightHandlePosition={Select?.trimmerRightHandlePosition}
+            />
+        </View>
+    )
+}
+
+export default AudioCut
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    songbtn: {
+        width: 100,
+        alignItems: 'center',
+        paddingVertical: 10,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        elevation: 5
+    }
+})

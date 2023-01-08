@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "111755823866",
+    "project_id": "chatsapp-5bc31",
+    "storage_bucket": "chatsapp-5bc31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111755823866:android:edd871d478a64244a11743",
+        "android_client_info": {
+          "package_name": "com.musicapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111755823866-6bno8at9ja2q40vrt6larbr4uiap785u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlQax9evPmIkueixZI4VquScD8HhvPIbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111755823866-6bno8at9ja2q40vrt6larbr4uiap785u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "111755823866-gn5sr0ig1qce7iq1sj7es33earbd3ioq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.musicapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
