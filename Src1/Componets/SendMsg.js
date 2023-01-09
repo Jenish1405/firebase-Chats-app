@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { sendNotification } from './SendNotification'
 import firestore from '@react-native-firebase/firestore'
 import Icons from "react-native-vector-icons/FontAwesome";
-import moment, { now } from 'moment';
+import moment from 'moment';
 
 
 const SendMsg = ({ ID, curUserData, tokenID }) => {
@@ -37,7 +37,7 @@ const SendMsg = ({ ID, curUserData, tokenID }) => {
     }
 
     return (
-        <View style={{ marginHorizontal: 15, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }}>
+        <View style={styles.container}>
             <TextInput
                 value={input}
                 onChangeText={text => setInput(text)}
@@ -45,7 +45,7 @@ const SendMsg = ({ ID, curUserData, tokenID }) => {
                 style={styles.textinput} />
             <TouchableOpacity
                 onPress={handleSendMsg}
-                style={{ marginLeft: 10, borderRadius: 100, padding: 13, backgroundColor: '#128c7e' }}>
+                style={styles.sendBtn}>
                 <Icons name='send' size={20} color={'#FFF'} />
             </TouchableOpacity>
         </View>
@@ -63,4 +63,16 @@ const styles = StyleSheet.create({
         elevation: 5
 
     },
+    container: {
+        marginHorizontal: 15, 
+        marginBottom: 5, 
+        flexDirection: 'row', 
+        alignItems: 'center'
+    },
+    sendBtn: {
+        marginLeft: 10, 
+        borderRadius: 100, 
+        padding: 13, 
+        backgroundColor: '#128c7e'
+    }
 })

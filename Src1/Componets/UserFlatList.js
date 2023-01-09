@@ -60,9 +60,9 @@ const UserFlatList = ({ item, curUser }) => {
             {
                 users ?
                     <View style={styles.container}>
-                        <Image source={{ uri: image }} style={{ width: 50, height: 50, borderRadius: 10 }} />
+                        <Image source={{ uri: image }} style={styles.image} />
                         <View style={{ marginLeft: 10 }}>
-                            <Text style={{ fontSize: 17, fontWeight: '700', color: '#000' }}>{name}</Text>
+                            <Text style={styles.userName}>{name}</Text>
                             <Text>{massages}</Text>
                         </View>
                     </View> : null
@@ -86,5 +86,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10
+    },
+    image: {
+        width: 50, 
+        height: 50, 
+        borderRadius: 10
+    },
+    userName: {
+        fontSize: 17, 
+        fontWeight: '700', 
+        color: '#000'
     }
 })
