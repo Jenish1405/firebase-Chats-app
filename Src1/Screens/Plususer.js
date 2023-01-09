@@ -52,21 +52,9 @@ const Plususer = ({ route, navigation }) => {
                         null
                     ) : (
                         <TouchableOpacity onPress={() => handlecustomRoom({data, id})}>
-                            <View style={{
-                                alignSelf: 'center',
-                                width: '90%',
-                                borderRadius: 10,
-                                elevation: 5,
-                                marginVertical: 5,
-                                paddingHorizontal: 15,
-                                flexDirection: 'row',
-                                height: 70,
-                                alignItems: 'center',
-                                backgroundColor: '#FFF',
-
-                            }}>
-                                <Image source={{ uri: data.profilePic }} style={{ width: 50, height: 50, borderRadius: 10 }} />
-                                <Text style={{ fontSize: 17, fontWeight: '700', color: '#000', marginLeft: 10 }}>{data.fullname}</Text>
+                            <View style={styles.usercontainer}>
+                                <Image source={{ uri: data.profilePic }} style={styles.image} />
+                                <Text style={styles.userName}>{data.fullname}</Text>
                             </View>
                         </TouchableOpacity>
                     )
@@ -82,5 +70,28 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFF'
+    },
+    usercontainer: {
+        alignSelf: 'center',
+        width: '90%',
+        borderRadius: 10,
+        elevation: 5,
+        marginVertical: 5,
+        paddingHorizontal: 15,
+        flexDirection: 'row',
+        height: 70,
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+    },
+    image: {
+        width: 50, 
+        height: 50, 
+        borderRadius: 10
+    },
+    userName: {
+        fontSize: 17, 
+        fontWeight: '700', 
+        color: '#000', 
+        marginLeft: 10
     }
 })

@@ -51,19 +51,19 @@ const Home = ({ navigation, route }) => {
         <>
             <View style={styles.container}>
                 <View style={styles.headercontainer}>
-                    <Text style={{ fontSize: 30, fontWeight: '700', color: '#000' }}>
+                    <Text style={styles.headerTitle}>
                         Chats
                     </Text>
-                    <View style={{ flexDirection: 'row', width: 80, justifyContent: 'space-between' }}>
+                    <View style={styles.headerRightcontainer}>
                         <TouchableOpacity
                             onPress={() => navigation.navigate('Plususer', { curuserId: UserData })}
-                            style={{ padding: 5, borderRadius: 8, backgroundColor: '#FFF', elevation: 10 }}>
+                            style={styles.icons}>
                             <Icons name='plus' size={25} color={'#000'} />
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             onPress={handleLogOut}
-                            style={{ padding: 5, borderRadius: 8, backgroundColor: '#FFF', elevation: 10 }} >
+                            style={styles.icons} >
                             <Icons1 name='logout' size={25} color={'#000'} />
                         </TouchableOpacity>
                     </View>
@@ -94,7 +94,6 @@ export default Home
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'blue'
     },
     headercontainer: {
         height: 70,
@@ -103,5 +102,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingHorizontal: 15,
         backgroundColor: '#FFF'
+    },
+    headerTitle: {
+        fontSize: 28,
+        fontWeight: '700',
+        color: '#000'
+    },
+    headerRightcontainer: {
+        flexDirection: 'row', 
+        width: 80, 
+        justifyContent: 'space-between'
+    },
+    icons: {
+        padding: 5, 
+        borderRadius: 8, 
+        backgroundColor: '#FFF', 
+        elevation: 10
     }
 })

@@ -35,9 +35,9 @@ const ChatsSrc = ({ navigation, route }) => {
 
         navigation.setOptions({
             headerTitle: () => (
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image source={{ uri: image }} style={{ width: 40, height: 40, borderRadius: 100, marginLeft: -20 }} />
-                    <Text style={{ marginLeft: 10, fontSize: 17, color: '#000', fontWeight: '700' }}>{name}</Text>
+                <View style={styles.headerconatiner}>
+                    <Image source={{ uri: image }} style={styles.headerImage} />
+                    <Text style={styles.headerTitle}>{name}</Text>
                 </View>
             ),
 
@@ -75,12 +75,12 @@ const ChatsSrc = ({ navigation, route }) => {
                     {messages.map(({ id, data }) =>
                         curUserData.email === data.email ?
                             (<View style={styles.chtasmsgMy}>
-                                <Text style={{ fontSize: 16, color: '#000' }}>{data.message}</Text>
-                                <Text style={{ fontSize: 10, marginLeft: 4 }}>{data.sendTime}</Text>
+                                <Text style={[styles.message, {color: '#000'}]}>{data.message}</Text>
+                                <Text style={styles.messageTime}>{data.sendTime}</Text>
                             </View>) :
                             (<View style={styles.chtasmsgOther}>
-                                <Text style={{ fontSize: 10, color: 'regba(0,0,0,0.3)', marginRight: 4 }}>{data.sendTime}</Text>
-                                <Text style={{ fontSize: 17, color: '#FFF' }}>{data.message}</Text>
+                                <Text style={styles.messageTime}>{data.sendTime}</Text>
+                                <Text style={[styles.message, {color: '#FFF'}]}>{data.message}</Text>
                             </View>)
                     )}
                 </ScrollView>
@@ -127,5 +127,28 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         flexDirection: 'row',
         alignItems: 'flex-end'
+    },
+    headerImage: {
+        width: 40, 
+        height: 40, 
+        borderRadius: 100, 
+        marginLeft: -20
+    },
+    headerconatiner: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    headerTitle: {
+        marginLeft: 10, 
+        fontSize: 17, 
+        color: '#000', 
+        fontWeight: '700'
+    },
+    message: {
+        fontSize: 15
+    },
+    messageTime: {
+        fontSize: 10,
+        marginHorizontal: 2
     }
 })
